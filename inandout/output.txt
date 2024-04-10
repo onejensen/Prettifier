@@ -1,0 +1,16 @@
+Your flight departs from Palma De Mallorca, and your destination is Kuopio Airport.
+Departure is scheduled at 07:18PM (-02:00) on 09 May 2022
+Flight Itinerary
+
+Palma De Mallorca Airport to Kuopio / Siilinj����rvi on 15 Jul 2023
+Departure: 09:00AM (-07:00)
+Arrival: 12:00 (+00:00)
+
+Southampton Airport to Hawarden Airport on 15 Jul 2023
+Departure: 09:00AM (-07:00)
+Arrival: 12:00 (+00:00)
+
+#Wewak International Airport to #BIHN on 15 Jul 2023
+##OOOO to #AAA on 15 Aug 2023
+
+09 May 2022
