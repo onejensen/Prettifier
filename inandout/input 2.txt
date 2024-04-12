@@ -1,0 +1,19 @@
+Your flight departs from *#PMI, and your destination is ##EFKU.
+Departure is scheduled at T12(2069-04-24T19:18-02:00) on D(2022-05-09T08:07Z)
+Flight Itinerary
+
+#PMI to ##EFKU on D(2023-07-15T09:00-07:00)
+Departure: T12(2023-07-15T09:00-07:00)
+Arrival: T24(2023-07-16T12:00Z)
+
+
+
+##EGHI to          #CEG on D(2023-07-15T09:00-07:00)
+Departure: T12(2023-07-15T09:00-07:00)
+Arrival: T24(2023-07-16T12:00Z)
+
+
+
+
+
+D(2022-05-09T08:07Z)
