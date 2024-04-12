@@ -11,11 +11,11 @@ your command line with a bonus "animation" effect and colors.
 - By default, input and output files are allocated in ./inandout.
 
 - You can run the tool just by using 'Make run' from your command line, 'Make run' is 
-a shortcut that will run automaticaly the usage of the tool so you don't have to type it.
+a shortcut that will run automatically the usage of the tool so you don't have to type it.
 
 - In case you want to run the tool with the input2.txt file you can use 'Make run2'
 
-- Feel free to modify the input txt however you want to test the funcionality of the tool.
+- Feel free to modify the input txt however you want to test the functionality of the tool.
 
 # Usage:
 
