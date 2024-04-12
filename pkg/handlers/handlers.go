@@ -147,7 +147,7 @@ func Convert_times(match string, input_database string) string {
 func Ok_Output(output_database string, output_file string, coloured_output string) {
 
 	good_bye := "\n" + "Thank you for using Anywhere Holidays Prettifier Tool" + "\n\n" + "See you soon!" + "\n\n"
-	output_done := "\n" + "-= Output succesfully written to ->" + output_file + "=-" + "\n\n" + "Do you want to print the result in the command line? (Y/N)" + "\n"
+	output_done := "\n" + "-= Output succesfully written to ->" + output_file + " =-" + "\n\n" + "Do you want to print the result in the command line? (Y/N)" + "\n"
 
 	err := os.WriteFile(output_file, []byte(output_database), 0644)
 	for _, letter := range output_done {
