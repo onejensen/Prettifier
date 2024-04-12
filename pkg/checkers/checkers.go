@@ -16,12 +16,20 @@ type Airport struct {
 	Coordinates  string
 }
 
+// Check_args checks if the user has provided the correct number of arguments,
+// and if they have provided the -h flag, it prints the usage instructions and exits.
+// The function returns the input, output and lookup files as strings.
 func Check_args(args []string) (string, string, string) {
-	//Check if there's three arguments or two arguments and one of them is "-h"
+
 	if len(args) != 4 || len(args) == 2 && args[1] == "-h" {
+
+		// Print the usage instructions.
+		fmt.Println("Itinerary usage:")
+		fmt.Println("go run ./cmd/itinerary/. ./inandout/input.txt ./inandout/output.txt ./airports_lookup.csv")
+
 		os.Exit(0)
 	}
-	//Return the name of the input, output and csv
+
 	return args[1], args[2], args[3]
 }
 
@@ -29,16 +37,14 @@ func Check_args(args []string) (string, string, string) {
 // If the input file cannot be found or cannot be read, the program exits with
 // a non-zero status and prints an error message to stderr.
 func Read_txt(input_file string) string {
-	// Open the input file for reading
+
 	input, err := os.ReadFile(input_file)
 
-	// If there was an error opening the file, print an error and exit
 	if err != nil {
 		fmt.Println("Input not found:", err)
 		os.Exit(0)
 	}
 
-	// The file contents are returned as a byte slice. Convert it to a string
 	return string(input)
 }
 
@@ -48,42 +54,31 @@ func Read_txt(input_file string) string {
 // an error message to stderr.
 func Read_csv(csv_file string) []Airport {
 
-	// Open the csv file for reading
 	lookup, err := os.Open(csv_file)
 
-	// If there was an error opening the file, print an error and exit
 	if err != nil {
 		fmt.Println("Airport lookup not found:", err)
 		os.Exit(0)
 	}
 
-	// Defer the closing of the file until after the function exits
 	defer lookup.Close()
 
-	// Create a new csv reader using the file
 	reader := csv.NewReader(lookup)
 
-	// Define a slice to store the airport data
 	airport_data := []Airport{}
 
-	// Read the csv file line by line
 	for {
-		// Read a line from the csv file
 		line, err := reader.Read()
 
-		// If we have reached the end of the file, break the loop
 		if err == io.EOF {
 			break
 		}
 
-		// If there was an error reading the file, print an error
-		// and exit
 		if err != nil {
 			fmt.Println("csv file corrupted:", err)
 			os.Exit(0)
 		}
 
-		// Create a new Airport struct and add it to the slice
 		airport := Airport{
 			Name:         line[0],
 			Iso_country:  line[1],
@@ -95,6 +90,5 @@ func Read_csv(csv_file string) []Airport {
 		airport_data = append(airport_data, airport)
 	}
 
-	// Return the slice of Airport structs
 	return airport_data
 }

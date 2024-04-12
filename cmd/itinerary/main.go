@@ -14,9 +14,9 @@ func main() {
 	//Read the csv file and make a database
 	csv_database := checkers.Read_csv(csv_file)
 	//Process the input (airport codes, whitespaces, timezones)
-	output_database := handlers.Process_inputs(input_database, csv_database)
+	output_database, coloured_database := handlers.Process_inputs(input_database, csv_database)
 	//Write the output file
-	handlers.Ok_Output(output_database, output_file)
+	handlers.Ok_Output(output_database, output_file, coloured_database)
 }
 
 /*
