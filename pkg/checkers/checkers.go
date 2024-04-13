@@ -52,30 +52,41 @@ func Read_txt(input_file string) string {
 // it as a slice of Airport structs. If the file cannot be found or
 // cannot be read, the program exits with a non-zero status and prints
 // an error message to stderr.
+// Read_csv reads the csv file containing airport data and returns
+// it as a slice of Airport structs. If the file cannot be found or
+// cannot be read, the program exits with a non-zero status and prints
+// an error message to stderr.
 func Read_csv(csv_file string) []Airport {
 
 	lookup, err := os.Open(csv_file)
-
 	if err != nil {
 		fmt.Println("Airport lookup not found:", err)
-		os.Exit(0)
+		os.Exit(1)
 	}
-
 	defer lookup.Close()
 
 	reader := csv.NewReader(lookup)
+	header, err := reader.Read()
+	if err != nil {
+		return nil
+	}
+	headerLength := len(header)
 
 	airport_data := []Airport{}
-
+	lineNumber := 1
 	for {
 		line, err := reader.Read()
-
 		if err == io.EOF {
 			break
 		}
+		if err != nil || len(line) < 6 {
+			fmt.Println("Airport lookup malformed")
+			os.Exit(0)
+		}
 
-		if err != nil {
-			fmt.Println("csv file corrupted:", err)
+		lineNumber++
+		if len(line) != headerLength {
+			fmt.Println("Airport lookup malformed")
 			os.Exit(0)
 		}
 

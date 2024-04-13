@@ -205,5 +205,7 @@ func trim_spaces(text string) string {
 	re := regexp.MustCompile(`\n{3,}`)
 	text = re.ReplaceAllString(text, "\n\n")
 
+	text = strings.TrimSpace(text)
+
 	return text
 }
