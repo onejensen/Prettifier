@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 )
 
 type Airport struct {
@@ -41,7 +42,7 @@ func Read_txt(input_file string) string {
 	input, err := os.ReadFile(input_file)
 
 	if err != nil {
-		fmt.Println("Input not found:", err)
+		fmt.Println("Input not found", err)
 		os.Exit(0)
 	}
 
@@ -60,7 +61,7 @@ func Read_csv(csv_file string) []Airport {
 
 	lookup, err := os.Open(csv_file)
 	if err != nil {
-		fmt.Println("Airport lookup not found:", err)
+		fmt.Println("Airport lookup not found", err)
 		os.Exit(1)
 	}
 	defer lookup.Close()
@@ -70,33 +71,48 @@ func Read_csv(csv_file string) []Airport {
 	if err != nil {
 		return nil
 	}
-	headerLength := len(header)
 
 	airport_data := []Airport{}
 	lineNumber := 1
+
+	columnPositions := make(map[string]int)
+	if len(header) < 6 {
+		fmt.Println("Airport lookup malformed (Not enough columns)")
+		os.Exit(0)
+	}
+
+	for i, column := range header {
+		if column == "" {
+			fmt.Println("Airport lookup malformed (Empty column)")
+			os.Exit(0)
+		}
+		columnPositions[column] = i
+	}
+
 	for {
 		line, err := reader.Read()
 		if err == io.EOF {
 			break
 		}
-		if err != nil || len(line) < 6 {
-			fmt.Println("Airport lookup malformed")
+		if err != nil {
+			fmt.Println("Airport lookup malformed", "("+err.Error()+")")
 			os.Exit(0)
 		}
-
+		for _, field := range line {
+			if strings.TrimSpace(field) == "" {
+				fmt.Printf("Airport lookup malformed (Empty field on line %d) \n", lineNumber)
+				os.Exit(0)
+			}
+		}
 		lineNumber++
-		if len(line) != headerLength {
-			fmt.Println("Airport lookup malformed")
-			os.Exit(0)
-		}
 
 		airport := Airport{
-			Name:         line[0],
-			Iso_country:  line[1],
-			Municipality: line[2],
-			Icao_code:    line[3],
-			Iata_code:    line[4],
-			Coordinates:  line[5],
+			Name:         line[columnPositions["name"]],
+			Iso_country:  line[columnPositions["iso_country"]],
+			Municipality: line[columnPositions["municipality"]],
+			Icao_code:    line[columnPositions["icao_code"]],
+			Iata_code:    line[columnPositions["iata_code"]],
+			Coordinates:  line[columnPositions["coordinates"]],
 		}
 		airport_data = append(airport_data, airport)
 	}

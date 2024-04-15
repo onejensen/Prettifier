@@ -13,7 +13,9 @@ your command line with a bonus "animation" effect and colors.
 - You can run the tool just by using 'Make run' from your command line, 'Make run' is 
 a shortcut that will run automatically the usage of the tool so you don't have to type it.
 
-- In case you want to run the tool with the input2.txt file you can use 'Make run2'.
+- There's few more options in Makefile for testing the tool, for example:
+"make malformed", "make malformed2", "make missing"...
+You can also modify the Makefile so it suits your own files path.
 
 - Feel free to modify the input txt however you want to test the functionality of the tool.
 
